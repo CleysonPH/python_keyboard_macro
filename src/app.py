@@ -3,21 +3,22 @@ import pyautogui
 
 
 line_count = 0
+file_lines = list()
 
 
 def read_file(file_name='code.txt'):
     file = open(file_name, 'r')
-    lines = file.readlines()
+    file_lines = file.readlines()
     file.close()
 
-    return lines
+    return file_lines
 
 
 def read_line():
     global line_count
-    lines = read_file()
-    if lines:
-        line = lines[line_count]
+    global file_lines
+    if file_lines and line_count < len(file_lines):
+        line = file_lines[line_count]
         line_count += 1
         return line
     return False
@@ -38,6 +39,8 @@ def on_key_press(event):
     elif event.Ascii == 197:
         exit(0)
 
+
+file_lines = read_file()
 
 hm = pyxhook.HookManager()
 hm.KeyDown = on_key_press
