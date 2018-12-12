@@ -2,6 +2,9 @@ import pyxhook
 import pyautogui
 
 
+line_count = 0
+
+
 def read_file(file_name='code.txt'):
     file = open(file_name, 'r')
     lines = file.readlines()
@@ -10,18 +13,12 @@ def read_file(file_name='code.txt'):
     return lines
 
 
-def write_files(lines, file_name='code.txt'):
-    file = open(file_name, 'w')
-    file.writelines(lines)
-    file.close()
-
-
 def read_line():
+    global line_count
     lines = read_file()
     if lines:
-        line = lines[0]
-        lines.pop(0)
-        write_files(lines)
+        line = lines[line_count]
+        line_count += 1
         return line
     return False
 
