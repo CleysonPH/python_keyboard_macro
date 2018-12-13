@@ -1,3 +1,4 @@
+import sys
 import pyxhook
 import pyautogui
 
@@ -40,7 +41,10 @@ def on_key_press(event):
         exit(0)
 
 
-file_lines = read_file()
+if len(sys.argv) > 1:
+    file_lines = read_file(sys.argv[1])
+else:
+    file_lines = read_file()
 
 hm = pyxhook.HookManager()
 hm.KeyDown = on_key_press
